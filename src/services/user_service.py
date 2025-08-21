@@ -1,5 +1,5 @@
-from domain.models.user import User
-from domain.models.iuser_repository import IUserRepository
+from domain.models.user import User, Admin
+from domain.models.iuser_repository import IUserRepository, IAdminRepository
 from typing import List, Optional
 
 class UserService:
@@ -22,3 +22,24 @@ class UserService:
 
     def delete_user(self, user_id: int) -> None:
         self.repository.delete(user_id) 
+
+class AdminService:
+    def __init__(self, repository: IAdminRepository):
+        self.repository = repository
+
+    def create_admin(self, user_id: int, username: str, email: str) -> Admin:
+        admin = Admin(id=None, user_id=user_id, username=username, email=email)
+        return self.repository.add(admin)
+
+    def get_admin(self, admin_id: int) -> Optional[Admin]:
+        return self.repository.get_by_id(admin_id)
+
+    def list_admins(self) -> List[Admin]:
+        return self.repository.list()
+
+    def update_admin(self, admin_id: int, user_id: int, username: str, email: str) -> Admin:
+        admin = Admin(id=admin_id, user_id=user_id, username=username, email=email)
+        return self.repository.update(admin)
+
+    def delete_admin(self, admin_id: int) -> None:
+        self.repository.delete(admin_id)

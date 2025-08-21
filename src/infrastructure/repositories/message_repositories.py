@@ -15,7 +15,7 @@ load_dotenv()
 
 class MessageRepository(IMessageRepository):
     def __init__(self, session: Session = session):
-        self._todos = []
+        self._messages = []
         self._id_counter = 1
         self.session = session
 

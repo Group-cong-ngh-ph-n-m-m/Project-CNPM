@@ -85,3 +85,4 @@ class MessageService:
 
     def delete_message(self, message_id: int) -> None:
         self.repository.delete(message_id)
+

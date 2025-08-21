@@ -12,3 +12,16 @@ class UserResponseSchema(Schema):
     role = fields.Str(required=True)
     created_at = fields.Raw(required=True)
     updated_at = fields.Raw(required=True)
+
+class AdminRequestSchema(Schema):
+    user_id = fields.Int(required=True)
+    user_name = fields.Str(required=True)
+    email = fields.Email(required=True)
+
+class AdminResponseSchema(Schema):
+    id = fields.Int(required=True)
+    user_id = fields.Int(required=True)
+    user_name = fields.Str(required=True)
+    email = fields.Email(required=True)
+    created_at = fields.Raw(required=True)
+    updated_at = fields.Raw(required=True)

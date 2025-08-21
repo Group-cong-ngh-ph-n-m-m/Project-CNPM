@@ -15,7 +15,7 @@ load_dotenv()
 
 class UserRepository(IUserRepository):
     def __init__(self, session: Session = session):
-        self._todos = []
+        self._users = []
         self._id_counter = 1
         self.session = session
 
@@ -93,19 +93,8 @@ class UserRepository(IUserRepository):
                 #return todo
         #raise ValueError('Todo not found')
 
-    def delete(self, user_id: int) -> None:
-        try:
-            user_model = self.session.query(UserModel).filter_by(id=user_id).first()
-            if user_model:
-                self.session.delete(user_model)
-                self.session.commit()
-            else:
-                raise ValueError('User not found')
-        except Exception as e:
-            self.session.rollback()
-            raise ValueError('User not found')
-        finally:
-            self.session.close() 
+    def delete(self, users_id: int) -> None:
+        self._users = [t for t in self._users if t.id != users_id] 
 
 class UserModel(Base):
     __tablename__ = 'users'
