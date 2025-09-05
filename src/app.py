@@ -6,6 +6,8 @@ from api.controllers.subject_controllers import bp as subject_bp
 from api.controllers.tutor_profile_controllers import bp as tutor_profile_bp
 from api.controllers.message_controllers import bp as message_bp
 from api.controllers.admin_controllers import bp as admin_bp
+from api.controllers.booking_controllers import bp as booking_bp
+from api.controllers.complaint_controllers import bp as complaint_bp
 from api.middleware import middleware
 from api.responses import success_response
 from infrastructure.databases import init_db
@@ -25,6 +27,8 @@ def create_app():
     app.register_blueprint(tutor_profile_bp)
     app.register_blueprint(message_bp)
     app.register_blueprint(admin_bp)
+    app.register_blueprint(booking_bp)
+    app.register_blueprint(complaint_bp)
 
     # Thêm Swagger UI blueprint
     SWAGGER_URL = '/docs'
@@ -46,7 +50,7 @@ def create_app():
     # Tự động quét tất cả các route đã đăng ký
     with app.test_request_context():
         for rule in app.url_map.iter_rules():
-            if rule.endpoint.startswith(('todo.', 'user.', 'subject.', 'tutor_profile.', 'message.', 'admin.')):
+            if rule.endpoint.startswith(('todo.', 'user.', 'subject.', 'tutor_profile.', 'message.', 'admin.', 'booking.', 'complaint.')):
                 view_func = app.view_functions[rule.endpoint]
                 print(f"Adding path: {rule.rule} -> {view_func}")
                 spec.path(view=view_func)

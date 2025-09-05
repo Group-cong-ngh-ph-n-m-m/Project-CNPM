@@ -11,7 +11,6 @@ class UserResponseSchema(Schema):
     email = fields.Email(required=True)
     role = fields.Str(required=True)
     created_at = fields.Raw(required=True)
-    updated_at = fields.Raw(required=True)
 
 class AdminRequestSchema(Schema):
     user_id = fields.Int(required=True)
