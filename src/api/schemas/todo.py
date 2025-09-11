@@ -49,3 +49,48 @@ class MessageResponseSchema(Schema):
     receiver_id = fields.Int(required=True)
     created_at = fields.Raw(required=True)
     updated_at = fields.Raw(required=True)
+
+class ConversationRequestSchema(Schema):
+    sender = fields.Str(required=True)
+    receiver = fields.Str(required=True)
+    message = fields.Str(required=True)
+
+class ConversationResponseSchema(Schema):
+    id = fields.Int(required=True)
+    sender = fields.Str(required=True)
+    receiver = fields.Str(required=True)
+    message = fields.Str(required=True)
+    timestamp = fields.Raw(required=True)
+
+class RatingRequestSchema(Schema):
+    user_id = fields.Int(required=True)
+    item_id = fields.Int(required=True)
+    score = fields.Float(required=True)
+    comment = fields.Str(required=False)
+
+class RatingResponseSchema(Schema):
+    id = fields.Int(required=True)
+    user_id = fields.Int(required=True)
+    item_id = fields.Int(required=True)
+    score = fields.Float(required=True)
+    comment = fields.Str(required=False)
+    created_at = fields.Raw(required=True)
+    updated_at = fields.Raw(required=True)
+
+class ReviewRequestSchema(Schema):
+    user_id = fields.Int(required=True)
+    item_id = fields.Int(required=True)
+    title = fields.Str(required=True)
+    content = fields.Str(required=True)
+    rating = fields.Float(required=False)  # optional
+
+class ReviewResponseSchema(Schema):
+    id = fields.Int(required=True)
+    user_id = fields.Int(required=True)
+    item_id = fields.Int(required=True)
+    title = fields.Str(required=True)
+    content = fields.Str(required=True)
+    rating = fields.Float(required=False)
+    created_at = fields.Raw(required=True)
+    updated_at = fields.Raw(required=True)
+
