@@ -1,10 +1,10 @@
-from datetime import datetime
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, DECIMAL
+from infrastructure.databases.base import Base
 
-class Conversation:
-    def __init__(self, id: int = None, topic: str = "", created_at: datetime = None):
-        self.id = id
-        self.topic = topic
-        self.created_at = created_at or datetime.utcnow()
+class ConversationModel(Base):
+    __tablename__ = 'conversation'
+    __table_args__ = {'extend_existing': True}  
 
-    def __repr__(self):
-        return f"<Conversation id={self.id}, topic={self.topic}, created_at={self.created_at}>"
+    id = Column(Integer, primary_key=True)
+    booking_id = Column(Integer, ForeignKey('booking.id'), nullable=False)
+    created_at = Column(DateTime, nullable=False)
