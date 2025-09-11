@@ -1,8 +1,14 @@
-class Rating:
-    def __init__(self, id: int = None, score: int = 0, comment: str = ""):
-        self.id = id
-        self.score = score
-        self.comment = comment
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
+from infrastructure.databases.base import Base
 
-    def __repr__(self):
-        return f"<Rating id={self.id}, score={self.score}, comment={self.comment}>"
+class RatingModel(Base):
+    __tablename__ = 'rating'
+    __table_args__ = {'extend_existing': True}  
+
+    id = Column(Integer, primary_key=True)
+    booking_id = Column(Integer, ForeignKey('booking.id'), nullable=False)
+    student_user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    tutor_user_id = Column(Integer, ForeignKey('tutor_profile.id'), nullable=False)
+    rating = Column(Integer, nullable=False)
+    comment = Column(Text, nullable=True)
+    created_at = Column(DateTime, nullable=False)
