@@ -15,3 +15,5 @@ def create_admin():
         return jsonify({"error": "Content-Type must be application/json"}), 400
     data = request.get_json()
     return jsonify(uc.create(data)), 201
+
+
