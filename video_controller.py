@@ -7,11 +7,14 @@ uc = VideoUseCase(VideoRepository())
 
 @bp.route("/", methods=["GET"])
 def list_videos():
-    return jsonify(uc.get_all()), 200
+    videos = uc.get_all()
+    return jsonify([v.to_dict() for v in videos]), 200
 
 @bp.route("/", methods=["POST"])
 def create_video():
     if not request.is_json:
         return jsonify({"error": "Content-Type must be application/json"}), 400
     data = request.get_json()
-    return jsonify(uc.create(data)), 201
+    video = uc.create(data)
+    return jsonify(video.to_dict()), 201
+
