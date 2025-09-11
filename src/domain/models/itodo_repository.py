@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from .todo import Todo, Subject, TutorProfile, Message
+from .todo import Todo, Subject, TutorProfile, Message, Conversation, Review, Rating
 from typing import List, Optional
 
 class ITodoRepository(ABC):
@@ -85,3 +85,69 @@ class IMessageRepository(ABC):
     @abstractmethod
     def delete(self, message_id: int) -> None:
         pass
+
+class IConversationRepository(ABC):
+    @abstractmethod
+    def add(self, conversation: "Conversation") -> "Conversation":
+        pass
+
+    @abstractmethod
+    def get_by_id(self, conversation_id: int) -> Optional["Conversation"]:
+        pass
+
+    @abstractmethod
+    def list(self) -> List["Conversation"]:
+        pass
+
+    @abstractmethod
+    def update(self, conversation: "Conversation") -> "Conversation":
+        pass
+
+    @abstractmethod
+    def delete(self, conversation_id: int) -> None:
+        pass
+
+class IReviewRepository(ABC):
+    @abstractmethod
+    def add(self, review: "Review") -> "Review":
+        pass
+
+    @abstractmethod
+    def get_by_id(self, review_id: int) -> Optional["Review"]:
+        pass
+
+    @abstractmethod
+    def list(self) -> List["Review"]:
+        pass
+
+    @abstractmethod
+    def update(self, review: "Review") -> "Review":
+        pass
+
+    @abstractmethod
+    def delete(self, review_id: int) -> None:
+        pass
+
+class IRatingRepository(ABC):
+    @abstractmethod
+    def add(self, rating: "Rating") -> "Rating":
+        pass
+
+    @abstractmethod
+    def get_by_id(self, rating_id: int) -> Optional["Rating"]:
+        pass
+
+    @abstractmethod
+    def list(self) -> List["Rating"]:
+        pass
+
+    @abstractmethod
+    def update(self, rating: "Rating") -> "Rating":
+        pass
+
+    @abstractmethod
+    def delete(self, rating_id: int) -> None:
+        pass
+
+
+
