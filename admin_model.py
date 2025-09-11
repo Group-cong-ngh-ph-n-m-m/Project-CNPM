@@ -1,5 +1,6 @@
 from infrastructure.databases import db
-class AdminEntity(db.Model):
+
+class AdminModel(db.Model):
     __tablename__ = "admins"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -8,4 +9,4 @@ class AdminEntity(db.Model):
     password = db.Column(db.String(255), nullable=True)
 
     def __repr__(self):
-        return f"<AdminEntity id={self.id}, username={self.username}, email={self.email}>"
+        return f"<AdminModel id={self.id}, username={self.username}, email={self.email}>"
